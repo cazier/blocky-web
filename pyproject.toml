@@ -1,0 +1,32 @@
+[tool.black]
+line-length = 119
+
+[tool.isort]
+line_length = 119
+length_sort = true
+multi_line_output = 3
+include_trailing_comma = true
+
+[tool.poetry]
+name = "blocky-web"
+version = "0.1.0"
+description = "A web interface to enable/disable blocky and manage your blocklists"
+authors = ["Your Name <you@example.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+httpx = "^0.22.0"
+starlette = "^0.18.0"
+Jinja2 = "^3.0.3"
+uvicorn = "^0.17.5"
+
+[tool.poetry.dev-dependencies]
+pre-commit = "^2.17.0"
+ipython = "^8.0.1"
+mypy = "^0.931"
+rich = "^11.2.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="template" content="{{ self._TemplateReference__context.name }}">
+    <meta name="template" content="{{ self }}">
+    <title>Blocky Web</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', path='node_modules/bulma/css/bulma.css') }}" media="screen" />
+
+    <!-- {# <link rel="stylesheet" href="{{ url_for('static', path='dist/style.css') }}" media="screen" /> #} -->
+    <!-- <script src="{{ url_for('static', path='node_modules/bulma-toast/dist/bulma-toast.min.js') }}"></script> -->
+    <style>
+        .section {
+            padding: 1.5rem
+        }
+
+        .force-border {
+            border: 1px solid;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar is-dark" role="navigation" aria-label="main dropdown navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="#">
+                <span class="icon-text">
+                    <span class="icon">
+                        <i class="fa-solid fa-cloud"></i>
+                            {# <i class="fa-solid fa-shield-blank fa-stack-1x"></i> #}
+                    </span>
+                    <span>
+                        Blocky Web
+                    </span>
+                </span>
+            </a>
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="header-bar">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+        <div id="header-bar" class="navbar-menu">
+            <div class="navbar-end">
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">
+                        About
+                    </a>
+                    <div class="navbar-dropdown is-right">
+                        <a class="navbar-item" href="https://github.com/0xERR0R/blocky/">
+                            Blocky
+                        </a>
+                        <a class="navbar-item" href="#">
+                            Blocky-Web
+                        </a>
+                        <hr class="navbar-divider">
+                        <div class="navbar-item">
+                            Version {{ version }}
+                        </div>
+                        <a class="navbar-item" href="#">
+                            Issues?
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </nav>
+    {% block content %}{% endblock %}
+    <section class="section">
+        <div class="container columns">
+            <span class="control column is-one-quarter">
+                <button class="button toggle is-fullwidth is-success" id="enable" {% if enabled %}style="display: none;" {% endif %}>
+                    <span class="icon is-small">
+                        <i class="fa-solid fa-circle-play"></i>
+                    </span>
+                    <p>
+                        Enable Blocking
+                    </p>
+                </button>
+                <button class="button toggle is-fullwidth is-warning" id="disable" {% if not enabled %}style="display: none;" {% endif %}>
+                    <span class="icon is-small">
+                        <i class="fa-solid fa-circle-play"></i>
+                    </span>
+                    <p>
+                        Disable Blocking
+                    </p>
+                </button>
+            </span>
+            <span class="control column is-fullwidth">
+                <form action="query">
+                    <div class="field has-addons">
+                        <div class="control is-expanded">
+                            <input class="input" type="text" name="domain" placeholder="Submit a DNS query"
+                                value="reddit.com">
+                        </div>
+                        <div class="control">
+                            <button class="button submit is-info">
+                                Submit
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </span>
+        </div>
+    </section>
+</body>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script src="{{ url_for('static', path='dist/bundle.js') }}"></script>
+<!-- <script src="{{ url_for('static', path='index.js') }}"></script> -->
+
+</html>

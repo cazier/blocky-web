@@ -1,0 +1,8 @@
+config.yaml
+.envrc
+
+__pycache__/
+*.py[cod]
+*$py.class
+.mypy_cache/
+node_modules

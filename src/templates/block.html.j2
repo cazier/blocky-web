@@ -1,0 +1,58 @@
+{% extends "base.html.j2" %}
+{% block content %}
+<section class="hero is-info">
+    <div class="hero-body">
+        <p class="title">
+            Domain Blocked!
+        </p>
+        <p class="subtitle">
+            This site has been blocked by <a href="https://github.com/0xERR0R/blocky/">blocky</a>.
+            <br>
+        </p>
+        <div class="container columns">
+            <span class="control column is-half">
+                <form action=add>
+                    <button class="button is-fullwidth is-link is-light">
+                        <span class="icon is-small">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </span>
+                        <span>
+                            Whitelist Domain
+                        </span>
+                    </button>
+                    <input type="hidden" name="redirect" value="false" />
+                    <input type="hidden" name="domain" value="{{ url }}" />
+                </form>
+            </span>
+            <span class="control column is-half">
+                <form action='add'>
+                    <button class="button is-fullwidth is-primary is-light">
+                        <span class="icon is-small">
+                            <i class="fa-solid fa-circle-chevron-right"></i>
+                        </span>
+                        <span>
+                            Whitelist and Go To Domain
+                        </span>
+                    </button>
+                    <input type="hidden" name="redirect" value="true" />
+                    <input type="hidden" name="domain" value="{{ url }}" />
+                </form>
+            </span>
+            {# <p class="control column is-one-fourth">
+            <form action="add">
+                <button class="button is-fullwidth is-primary is-light">
+                    <span class="icon is-small">
+                        <ion-icon name="arrow-redo-circle-sharp"></ion-icon>
+                    </span>
+                    <span>
+                        Maybe a third with a timer?
+                    </span>
+                </button>
+                <input type="hidden" name="redirect" value="true" />
+                <input type="hidden" name="domain" value="{{ url }}" />
+            </form>
+            </p> #}
+        </div>
+    </div>
+</section>
+{% endblock %}

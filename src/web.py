@@ -7,6 +7,7 @@ from urllib.parse import urlparse, urlencode
 import yaml
 import httpx
 import uvicorn
+from single_source import get_version
 from starlette.routing import Mount, Route
 from starlette.requests import Request
 from starlette.responses import JSONResponse, RedirectResponse
@@ -35,9 +36,8 @@ class _Config(yaml.YAMLObject):
 
 
 config = _Config()
-
 templates = Jinja2Templates(directory=config.cwd.joinpath("templates"))
-templates.env.globals["version"] = "0.1.0"
+templates.env.globals["version"] = get_version(__name__, config.cwd.parent)
 
 
 def add_status(

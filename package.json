@@ -1,8 +1,6 @@
 {
   "name": "blocky-web",
-  "version": "0.1.0",
   "description": "A web interface to enable/disable blocky and manage blocklists",
-  "main": "index.js",
   "scripts": {
     "build": "webpack --progress --config webpack.config.js",
     "dev-build": "webpack --progress -d --config webpack.config.js",

@@ -96,6 +96,9 @@ async def api(request: Request) -> JSONResponse:
         case "add":
             return JSONResponse(add(domain=body.get("domain"), redirect=body.get("redirect")))
 
+        case _:
+            return JSONResponse({"rc": False, "message": "A server error occurred"}, status_code=500)
+
 
 def query(domain: str) -> dict[str, str | bool]:
     response = httpx.post(f"{config.blocky_api_url}query", json={"query": domain, "type": "A"})

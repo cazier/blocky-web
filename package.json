@@ -16,6 +16,7 @@
     "bulma-toast": "^2.4.1",
     "cash-dom": "^8.1.1",
     "css-loader": "^6.7.0",
+    "css.gg": "^2.0.0",
     "mini-css-extract-plugin": "^2.6.0",
     "node-sass": "^7.0.1",
     "purgecss-webpack-plugin": "^4.1.3",

@@ -1,3 +1,4 @@
+require('./style.scss');
 
 let $ = require('cash-dom');
 let bulmaToast = require('bulma-toast');

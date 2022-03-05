@@ -25,8 +25,7 @@
             <a class="navbar-item" href="#">
                 <span class="icon-text">
                     <span class="icon">
-                        <i class="fa-solid fa-cloud"></i>
-                            {# <i class="fa-solid fa-shield-blank fa-stack-1x"></i> #}
+                        <i class="gg-block"></i>
                     </span>
                     <span>
                         Blocky Web
@@ -67,40 +66,44 @@
     </nav>
     {% block content %}{% endblock %}
     <section class="section">
-        <div class="container columns">
-            <span class="control column is-one-quarter">
-                <button class="button toggle is-fullwidth is-success" id="enable" {% if enabled %}style="display: none;" {% endif %}>
-                    <span class="icon is-small">
-                        <i class="fa-solid fa-circle-play"></i>
-                    </span>
-                    <p>
-                        Enable Blocking
-                    </p>
-                </button>
-                <button class="button toggle is-fullwidth is-warning" id="disable" {% if not enabled %}style="display: none;" {% endif %}>
-                    <span class="icon is-small">
-                        <i class="fa-solid fa-circle-play"></i>
-                    </span>
-                    <p>
-                        Disable Blocking
-                    </p>
-                </button>
-            </span>
-            <span class="control column is-fullwidth">
-                <form action="query">
-                    <div class="field has-addons">
-                        <div class="control is-expanded">
-                            <input class="input" type="text" name="domain" placeholder="Submit a DNS query"
-                                value="reddit.com">
+        <div class="container">
+            <div class="columns">
+                <span class="control column is-one-quarter">
+                    <button class="button toggle is-fullwidth is-success" id="enable" {% if enabled %}style="display: none;"{% endif %}>
+                        <span class="icon is-small">
+                            <i class="gg-play-button-o"></i>
+                        </span>
+                        <p>
+                            Enable Blocking
+                        </p>
+                    </button>
+                    <button class="button toggle is-fullwidth is-warning" id="disable" {% if not enabled %}style="display: none;" {% endif %}>
+                        <span class="icon is-small">
+                            <i class="gg-play-button-o"></i>
+                        </span>
+                        <p>
+                            Disable Blocking
+                        </p>
+                    </button>
+                </span>
+                <span class="control column is-fullwidth">
+                    <form action="query">
+                        <div class="field has-addons">
+                            <div class="control is-expanded has-icons-left">
+                                <span class="icon is-left">
+                                    <i class="gg-search"></i>
+                                </span>
+                                <input class="input" type="text" name="domain" placeholder="Submit a DNS query">
+                            </div>
+                            <div class="control">
+                                <button class="button submit is-info">
+                                    Submit
+                                </button>
+                            </div>
                         </div>
-                        <div class="control">
-                            <button class="button submit is-info">
-                                Submit
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </span>
+                    </form>
+                </span>
+            </div>
         </div>
     </section>
 </body>

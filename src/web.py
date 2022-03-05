@@ -29,7 +29,7 @@ class _Config(yaml.YAMLObject):
             self.blocky_allowed_path = pathlib.Path(items["blocky_allowed_path"])
             self.cwd = pathlib.Path(__file__).parent
 
-            self.blocky_web_server = str(items.get("blocky_web_server", ""))
+            self.host = str(items.get("blocky_web_server_host", ""))
 
         except (KeyError, FileNotFoundError):
             raise Exception("Ensure a configuration file titled `config.yaml` is properly filled out.")
@@ -56,17 +56,20 @@ def add_status(
 
 
 async def redirect(request: Request) -> RedirectResponse:
-    if not config.blocky_web_server:
+    if not config.host:
         try:
-            host, port = request.scope["server"]
-            config.blocky_web_server = f"http://{host}:{port}"
+            host, _ = request.scope["server"]
 
         except KeyError:
-            raise Exception("Unable to determine server settings. Please set blocky_web_server in config.yaml")
+            raise Exception("Unable to determine server settings. Please set blocky_web_server_host in config.yaml")
 
+    else:
+        host = config.host
+
+    blocky_web_server = f"http://{host}"
     domain = urlencode({"domain": request.base_url.netloc})
 
-    return RedirectResponse(f"{config.blocky_web_server}{urlparse(request.url_for('block')).path}?{domain}")
+    return RedirectResponse(f"{blocky_web_server}{urlparse(request.url_for('block')).path}?{domain}")
 
 
 @add_status
@@ -153,7 +156,6 @@ def add(domain: str, redirect: bool) -> dict[str, str | bool]:
 
 
 app = Starlette(
-    debug=True,
     routes=[
         Route("/", redirect),
         Route("/block", block),

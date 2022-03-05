@@ -1,6 +1,6 @@
 # Required Parameters
-blocky_api_url: http://127.0.0.1:4000/api/
-blocky_allowed_path: /app/allowed.txt
+blocky_api_url: http://192.168.1.220:4000/api/
+blocky_allowed_path: /config/allowed.txt
 
 # Optional Parameters
-blocky_web_server: http://127.0.0.1:80
+blocky_web_server_host: 192.168.1.220

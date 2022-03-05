@@ -9,7 +9,7 @@ include_trailing_comma = true
 
 [tool.poetry]
 name = "blocky-web"
-version = "1.0.0"
+version = "1.1.0"
 description = "A web interface to enable/disable blocky and manage your blocklists"
 authors = ["Brendan Cazier"]
 license = "MIT"
@@ -31,6 +31,7 @@ pre-commit = "^2.17.0"
 ipython = "^8.0.1"
 mypy = "^0.931"
 rich = "^11.2.0"
+types-PyYAML = "^6.0.4"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

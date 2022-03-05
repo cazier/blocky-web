@@ -2,10 +2,8 @@
   "name": "blocky-web",
   "description": "A web interface to enable/disable blocky and manage blocklists",
   "scripts": {
-    "build": "webpack --progress --config webpack.config.js",
-    "dev-build": "webpack --progress -d --config webpack.config.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "webpack --progress -d --config webpack.config.js --watch"
+    "build": "webpack --progress --config webpack.config.js --mode=production",
+    "dev": "webpack --progress -d --config webpack.config.js --mode=development"
   },
   "author": "Your Name",
   "license": "MIT",

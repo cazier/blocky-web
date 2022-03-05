@@ -20,16 +20,16 @@ P = ParamSpec("P")
 
 
 class _Config(yaml.YAMLObject):
-    def __init__(self):
+    def __init__(self) -> None:
         try:
             with open("config.yaml", "r") as f:
                 items = yaml.safe_load(f)
 
-            self.blocky_api_url = items["blocky_api_url"]
-            self.blocky_allowed_path = pathlib.Path(items["blocky_allowed_path"])
-            self.cwd = pathlib.Path(__file__).parent
+            self.blocky_api_url: str = items["blocky_api_url"]
+            self.blocky_allowed_path: pathlib.Path = pathlib.Path(items["blocky_allowed_path"])
+            self.cwd: pathlib.Path = pathlib.Path(__file__).parent
 
-            self.blocky_web_server = str(items.get("blocky_web_server", ""))
+            self.host: str = str(items.get("blocky_web_server_host", ""))
 
         except (KeyError, FileNotFoundError):
             raise Exception("Ensure a configuration file titled `config.yaml` is properly filled out.")
@@ -56,17 +56,20 @@ def add_status(
 
 
 async def redirect(request: Request) -> RedirectResponse:
-    if not config.blocky_web_server:
+    if not config.host:
         try:
-            host, port = request.scope["server"]
-            config.blocky_web_server = f"http://{host}:{port}"
+            host, _ = request.scope["server"]
 
         except KeyError:
-            raise Exception("Unable to determine server settings. Please set blocky_web_server in config.yaml")
+            raise Exception("Unable to determine server settings. Please set blocky_web_server_host in config.yaml")
 
+    else:
+        host = config.host
+
+    blocky_web_server = f"http://{host}"
     domain = urlencode({"domain": request.base_url.netloc})
 
-    return RedirectResponse(f"{config.blocky_web_server}{urlparse(request.url_for('block')).path}?{domain}")
+    return RedirectResponse(f"{blocky_web_server}{urlparse(request.url_for('block')).path}?{domain}")
 
 
 @add_status
@@ -86,18 +89,17 @@ async def api(request: Request) -> JSONResponse:
     body = await request.json()
     action = urlparse(body.get("action")).path[1:]
 
-    match action:
-        case "query":
-            return JSONResponse(query(domain=body.get("domain")))
+    if action == "query":
+        return JSONResponse(query(domain=body.get("domain")))
 
-        case "toggle":
-            return JSONResponse(toggle(state=body.get("state")))
+    elif action == "toggle":
+        return JSONResponse(toggle(state=body.get("state")))
 
-        case "add":
-            return JSONResponse(add(domain=body.get("domain"), redirect=body.get("redirect")))
+    elif action == "add":
+        return JSONResponse(add(domain=body.get("domain"), redirect=body.get("redirect")))
 
-        case _:
-            return JSONResponse({"rc": False, "message": "A server error occurred"}, status_code=500)
+    else:
+        return JSONResponse({"rc": False, "message": "A server error occurred"}, status_code=500)
 
 
 def query(domain: str) -> dict[str, str | bool]:
@@ -131,7 +133,7 @@ def toggle(state: str) -> dict[str, str | bool]:
     return {"rc": True, "message": f"Successfully toggled blocking to the {state} state", "type": "is-primary"}
 
 
-def add(domain: str, redirect: bool) -> dict[str, str | bool]:
+def add(domain: str, redirect: str) -> dict[str, str | bool]:
     with open(config.blocky_allowed_path, "a") as f:
         f.write(f"{domain}\n")
 
@@ -153,7 +155,6 @@ def add(domain: str, redirect: bool) -> dict[str, str | bool]:
 
 
 app = Starlette(
-    debug=True,
     routes=[
         Route("/", redirect),
         Route("/block", block),

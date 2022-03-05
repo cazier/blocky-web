@@ -12,3 +12,8 @@ poetry install
 npm install
 npm run build
 ```
+
+### Docker
+```sh
+docker run -v $PWD/config.yaml:/config/config.yaml -v $PWD/allowed.txt:/config/allowed.txt -p 80:80 --ti cazier/blockyweb:latest
+```

@@ -7,11 +7,7 @@
     <meta name="template" content="{{ self._TemplateReference__context.name }}">
     <meta name="template" content="{{ self }}">
     <title>Blocky Web</title>
-
-    <link rel="stylesheet" href="{{ url_for('static', path='node_modules/bulma/css/bulma.css') }}" media="screen" />
-
-    <!-- {# <link rel="stylesheet" href="{{ url_for('static', path='dist/style.css') }}" media="screen" /> #} -->
-    <!-- <script src="{{ url_for('static', path='node_modules/bulma-toast/dist/bulma-toast.min.js') }}"></script> -->
+    <link rel="stylesheet" href="{{ url_for('static', path='dist/style.css') }}" media="screen" />
     <style>
         .section {
             padding: 1.5rem
@@ -108,9 +104,6 @@
         </div>
     </section>
 </body>
-<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 <script src="{{ url_for('static', path='dist/bundle.js') }}"></script>
-<!-- <script src="{{ url_for('static', path='index.js') }}"></script> -->
 
 </html>

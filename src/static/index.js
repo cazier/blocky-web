@@ -1,14 +1,3 @@
-// require('./style.scss');
-
-// import { library, dom } from "@fortawesome/fontawesome-svg-core";
-// import { faCirclePlay } from "@fortawesome/free-solid-svg-icons/faCirclePlay";
-// import { faCircleCheck } from "@fortawesome/free-solid-svg-icons/faCircleCheck";
-// import { faCircleChevronRight } from "@fortawesome/free-solid-svg-icons/faCircleChevronRight";
-// import { faCloud } from "@fortawesome/free-solid-svg-icons/faCloud";
-// import { faShieldBlank } from "@fortawesome/free-solid-svg-icons/faShieldBlank";
-// library.add(faCirclePlay, faCircleCheck, faCircleChevronRight, faCloud, faShieldBlank);
-// dom.watch();
-
 
 let $ = require('cash-dom');
 let bulmaToast = require('bulma-toast');

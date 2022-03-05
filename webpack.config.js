@@ -8,7 +8,7 @@ const PurgeCSSPlugin = require('purgecss-webpack-plugin')
 const src = path.resolve(__dirname, 'src');
 const static = path.resolve(src, 'static');
 
-module.exports = {
+var config = {
   entry: path.resolve(static, './index.js'),
   output: {
     path: path.join(static, 'dist'),
@@ -18,25 +18,35 @@ module.exports = {
     rules: [{
       test: /\.scss$/,
       use: [
-          MiniCssExtractPlugin.loader,
-          {
-            loader: 'css-loader'
-          },
-          {
-            loader: 'sass-loader',
-            options: {
-              sourceMap: false,
-            }
+        MiniCssExtractPlugin.loader,
+        {
+          loader: 'css-loader'
+        },
+        {
+          loader: 'sass-loader',
+          options: {
+            sourceMap: false,
           }
-        ]
+        }
+      ]
     }]
   },
   plugins: [
     new MiniCssExtractPlugin({ filename: 'style.css' }),
     new PurgeCSSPlugin({
-        paths: glob.sync(path.resolve(src, 'templates') + '/*.html.j2',  { nodir: true }),
-        safelist: ['is-active'],
-      }),
+      paths: glob.sync(path.resolve(src, 'templates') + '/*.html.j2', { nodir: true }),
+      safelist: ['is-active'],
+    }),
   ],
-  mode: 'production',
+}
+
+module.exports = (env, argv) => {
+  if (argv.mode === 'development') {
+    config.watch = true;
+    config.mode = 'development';
+  } else {
+    config.mode = 'production';
+  };
+
+  return config;
 };
